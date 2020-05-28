@@ -42,12 +42,13 @@ gbt = GradientBoostingClassifier(learning_rate=0.01, n_estimators=100, max_depth
 
 joblib.dump(gbt, 'gbt.model')
 
-print("training score : %.3f " % gbt.score(X_train, y_train))
-print("Mean squared error: %.2f" % mean_squared_error(y_test, gbt.predict(X_test)))
-print('Variance score: %.2f' % r2_score(fulldata, target))
+fullp = gbt.predict(fulldata)
+print("training score : %.3f " % gbt.score(fulldata, target))
+print("Mean squared error: %.2f" % mean_squared_error(fullp, target))
+print('Variance score: %.2f' % r2_score(fullp, target))
 
-fullpred = pandas.DataFrame(gbt.predict(fulldata), columns=['influence'])
-output = pandas.concat([fullpred, data['verifyName'], target], axis=1)
+fullpdf = pandas.DataFrame(fullp, columns=['influence'])
+output = pandas.concat([fullpdf, data['verifyName'], target], axis=1)
 output = pandas.DataFrame(output, columns=['influence','verifyName', 'fans'])
 output.to_csv('output-influence-with-name-target.csv', encoding='gbk', columns=['influence','verifyName', 'fans'], header=True, index=False)
 print('INF generated.')
