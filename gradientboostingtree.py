@@ -33,8 +33,8 @@ fulldata = pandas.concat([data[dense_features], extramatrix], axis=1)
 X_train, X_test, y_train, y_test =  train_test_split(fulldata, target, test_size=0.2, random_state=1234)
 
 #if training a model on training set, change to X_train and y_train, change this line. Now use the full dataset for training.
-gbt = GradientBoostingClassifier(learning_rate=0.01, n_estimators=100, max_depth=7, min_samples_leaf =60,
-                                 min_samples_split =1200,
+gbt = GradientBoostingClassifier(learning_rate=0.01, n_estimators=100, max_depth=9, min_samples_leaf =80,
+                                 min_samples_split =1000,
                                  max_features=9, verbose=1,
                                  # subsample=0.7
                                  # random_state=10
